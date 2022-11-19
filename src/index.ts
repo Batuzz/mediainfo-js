@@ -54,7 +54,7 @@ export class MediaInfo {
  
   private static getDataStream(input: string, errorHandler: ErrorHandlerFunction) {
     let stream;
- 
+
     if (input.toLowerCase().startsWith('http')) {
       stream = got.stream(input);
     } else {
@@ -77,11 +77,6 @@ export class MediaInfo {
       stream.on('data', (chunk) => {
         mediaInfoInstance.Open_Buffer_Continue(chunk);
         seekTo = mediaInfoInstance.Open_Buffer_Continue_Goto_Get();
- 
-        if (seekTo !== -1) {
-          mediaInfoInstance.Open_Buffer_Init(-1, seekTo);
-          stream.end();
-        }
       });
  
       stream.on('end', () => {
