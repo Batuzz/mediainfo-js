@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node  --trace-warnings -r ts-node/register -r tsconfig-paths/register example/example-usage",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
