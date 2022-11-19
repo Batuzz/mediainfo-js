@@ -12,7 +12,9 @@
   },
   "keywords": ["mediainfo"],
   "author": "Bartosz Studnik",
-  "contributors": [],
+  "contributors": [
+    { "name":"Maciej Kulon", "url":"https://github.com/maciej-kulon" }
+  ],
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.3.3",
