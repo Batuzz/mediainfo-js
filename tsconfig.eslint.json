@@ -1,0 +1,8 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "compilerOptions": {
+        "types": [
+            "mocha", "chai", "node", "sinon"
+        ]
+    },
+}
