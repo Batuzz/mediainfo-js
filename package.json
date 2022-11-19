@@ -2,9 +2,11 @@
   "name": "mediainfo-js",
   "version": "0.1.0",
   "description": "nodeJS mediainfo port",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "node  --trace-warnings -r ts-node/register -r tsconfig-paths/register example/example-usage",
+    "build": "tsc",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
