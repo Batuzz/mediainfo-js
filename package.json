@@ -1,15 +1,14 @@
 {
   "name": "mediainfo-js",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "nodeJS mediainfo port",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node  --trace-warnings -r ts-node/register -r tsconfig-paths/register example/example-usage",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
-  "keywords": [],
+  "keywords": ["mediainfo"],
   "author": "Bartosz Studnik",
   "contributors": [],
   "license": "ISC",
