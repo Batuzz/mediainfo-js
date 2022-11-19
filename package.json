@@ -10,7 +10,8 @@
     "lint:fix": "eslint . --ext .ts --fix"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bartosz Studnik",
+  "contributors": [],
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.3.3",
