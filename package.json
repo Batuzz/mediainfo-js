@@ -1,5 +1,5 @@
 {
-  "name": "mediainfo-js",
+  "name": "mediainfo-node",
   "version": "0.1.0",
   "description": "nodeJS mediainfo port",
   "main": "dist/index.js",
