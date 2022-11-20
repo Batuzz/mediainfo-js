@@ -26,10 +26,11 @@ export class MediaInfo {
     }
  
     try {
-      return await new Promise((resolve, reject) => {
+      return await new Promise(async (resolve, reject) => {
         const normalizedInput = MediaInfo.normalizeInput(input);
         const stream = MediaInfo.getDataStream(normalizedInput, reject);
-        resolve(this.getMediaInfoData(stream));
+        const mediaInfoData = await this.getMediaInfoData(stream);
+        resolve(mediaInfoData);
       });
     } catch (e) {
       throw new MediaInfoError('Failed to read media data', e);
@@ -84,7 +85,7 @@ export class MediaInfo {
     if(!stream) {
       errorHandler(`Could not create any stream for a given input: ${input}`);
     }
-    
+
     stream.on('error', errorHandler);
  
     return stream;
