@@ -1,7 +1,6 @@
 import * as MediaInfoLib from '../lib/MediaInfoWasm';
-import * as fs from 'fs';
-import got from 'got';
-import { MediaInfoError, MediaInfoInputError } from './errors';
+import { MediaInfoError } from './errors';
+import { InputHandlerFactory } from './inputHandlers/inputHandlerFactory';
  
 export type MediaInfoInput = URL | string;
  
@@ -28,7 +27,7 @@ export class MediaInfo {
     try {
       return await new Promise(async (resolve, reject) => {
         const normalizedInput = MediaInfo.normalizeInput(input);
-        const stream = MediaInfo.getDataStream(normalizedInput, reject);
+        const stream = await MediaInfo.getDataStream(normalizedInput, reject);
         const mediaInfoData = await this.getMediaInfoData(stream);
         resolve(mediaInfoData);
       });
@@ -48,44 +47,9 @@ export class MediaInfo {
     return normalizedInput;
   }
 
-  private static openFileStream(input: string) {
-    try {
-      const stream = fs.createReadStream(input);
-      if(stream.errored) {
-        throw stream.errored;
-      }
-      return stream;
-    } catch (err) {
-      throw new MediaInfoInputError('Could not open read stream to the file.', input, err);
-    }
-  }
-
-  private static openHttpStream(input: string) {
-    try {
-      const stream = got.stream(input);
-      if(stream.errored) {
-        throw stream.errored;
-      }
-      return stream;
-    } catch (err) {
-      throw new MediaInfoInputError('Could not open read stream from HTTP address.', input, err);
-    }
-  }
- 
-  private static getDataStream(input: string, errorHandler: ErrorHandlerFunction) {
-    let stream;
-    if (input.toLowerCase().startsWith('http')) {
-      stream = this.openHttpStream(input);
-    } else if (fs.existsSync(input)) {
-      stream = this.openFileStream(input);
-    } else {
-      throw new MediaInfoInputError('Input is neither HTTP address nor file path.', input);
-    }
-    
-    if(!stream) {
-      errorHandler(`Could not create any stream for a given input: ${input}`);
-    }
-
+  private static async getDataStream(input: string, errorHandler: ErrorHandlerFunction) {
+    const inputHandler = InputHandlerFactory.createInputHandler(input);
+    const stream = inputHandler.openStream(input);
     stream.on('error', errorHandler);
  
     return stream;

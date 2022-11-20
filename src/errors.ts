@@ -1,4 +1,4 @@
-import { PathLike } from 'fs';
+import { MediaInfoInput } from 'src';
 
 export class MediaInfoError extends Error {
   constructor(public readonly message: string, public readonly higherOrderError: any) {
@@ -10,7 +10,7 @@ export class MediaInfoError extends Error {
 export class MediaInfoInputError extends MediaInfoError {
   constructor(
     public readonly message: string,
-    public readonly input: PathLike,
+    public readonly input: MediaInfoInput,
     public readonly higherOrderError: any = undefined) {
     super(message, higherOrderError);
   }
