@@ -25,11 +25,12 @@ export class MediaInfo {
     }
  
     try {
-      return await new Promise(async (resolve, reject) => {
+      return await new Promise((resolve, reject) => {
         const normalizedInput = MediaInfo.normalizeInput(input);
-        const stream = await MediaInfo.getDataStream(normalizedInput, reject);
-        const mediaInfoData = await this.getMediaInfoData(stream);
-        resolve(mediaInfoData);
+        MediaInfo.getDataStream(normalizedInput, reject)
+        .then(stream => this.getMediaInfoData(stream))
+        .then(resolve)
+        .catch(reject);
       });
     } catch (e) {
       throw new MediaInfoError('Failed to read media data', e);
