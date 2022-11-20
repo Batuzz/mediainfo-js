@@ -1,3 +1,5 @@
+import { ReadStream } from 'fs';
+import { Duplex } from 'stream';
 import * as MediaInfoLib from '../lib/MediaInfoWasm';
 import { MediaInfoError } from './errors';
 import { InputHandlerFactory } from './inputHandlers/inputHandlerFactory';
@@ -48,7 +50,7 @@ export class MediaInfo {
     return normalizedInput;
   }
 
-  private static async getDataStream(input: string, errorHandler: ErrorHandlerFunction) {
+  private static async getDataStream(input: string, errorHandler: ErrorHandlerFunction): Promise<ReadStream | Duplex> {
     const inputHandler = InputHandlerFactory.createInputHandler(input);
     const stream = inputHandler.openStream(input);
     stream.on('error', errorHandler);

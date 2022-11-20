@@ -1,11 +1,11 @@
-import * as fs from 'fs';
+import { ReadStream, createReadStream } from 'fs';
 import { MediaInfoInputError } from '../errors';
 import { IMediaInfoInputHandler } from './IMediaInfoInputHandler';
 
 export class FileInputHandler implements IMediaInfoInputHandler {
-  public openStream(input: string): fs.ReadStream {
+  public openStream(input: string): ReadStream {
     try {
-      const stream = fs.createReadStream(input);
+      const stream = createReadStream(input);
       if (stream.errored) {
         throw stream.errored;
       }
