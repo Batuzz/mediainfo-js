@@ -1,4 +1,4 @@
-import got from 'got/dist/source';
+import got from 'got';
 import { MediaInfoInputError } from 'src/errors';
 import { Duplex } from 'stream';
 import { IMediaInfoInputHandler } from './IMediaInfoInputHandler';
